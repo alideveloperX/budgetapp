@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Budget App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: radial-gradient(white, rgb(215, 165, 71));
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+      }
+      .app {
+        background-color: rgba(255, 255, 255, 0.2);
+        height: 90vh;
+        width: 70vw;
+        position: relative;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      }
+      .budget {
+        padding: 10px 0;
+        width: 45%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+        background-color: orange;
+        color: white;
+        border-radius: 10px;
+        height: 40%;
+        margin: 10px 10px;
+      }
+      .budget input {
+        height: 35px;
+        text-align: center;
+        width: 60%;
+        outline: none;
+        border: none;
+        border-radius: 5px;
+      }
+      .budget button {
+        padding: 10px 20px;
+        border-radius: 70px;
+        color: orange;
+        border: none;
+        outline: none;
+      }
+      .amount {
+        width: 100%;
+        height: 60px;
+        background-color: orange;
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        color: white;
+      }
+      input::placeholder{
+        font-weight: bold;
+      }
+      .b2 {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      .box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .list {
+        width: 95%;
+        height: max-content;
+        margin: 10px auto;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        background-color: white;
+        padding: 10px 10px;
+        border-radius: 10px;
+      }
+      .item {
+        width: 80%;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 10px;
+        font-size: 18px;
+        font-weight: 400;
+      }
+      .productname {
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+      .productname::before {
+        content: "";
+        margin-right: 20px;
+        display: inline-flex;
+        height: 40px;
+        background-color: orange;
+        width: 6px;
+      }
+      .h1{
+        display: none;
+      }
+      h2 {
+        text-align: center;
+        color: orange;
+      }
+      .cross {
+        background:orange;
+        color: white;
+        height: 35px;
+        width: 35px;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .items {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      }
+      @media screen and (max-width:400px) {
+        .app{
+          margin-top: 20px;
+          width: 100vw;
+          background-color: none;
+          background: none;
+          box-shadow: none;
+        }
+        input::placeholder{
+          font-weight: 100;
+          font-size: 12px;
+        }
+        .budget{
+          margin-top: 20px;
+          width: 46%;
+        }
+        .budget input{
+          width: 90%;
+          border-radius: 3px;
+        }
+        .item{
+          width: 90%;
+        }
+        h1{
+          font-size: 24px;
+        }
+        .h1{
+          background-color: orange;
+          color: white;
+          text-align: center;
+          width: 100vw;
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          font-size: 22px;
+          padding: 10px 0;
+        }
+
+        
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="h1">Make your Budget 😊</h1>
+    <div class="app">
+      <div class="budget">
+        <h1>Budget</h1>
+        <input
+          type="text"
+          id="inputbudget"
+          placeholder="Enter your total amount."
+        />
+        <button class="btn setbudget">Set Budget</button>
+      </div>
+      <div class="budget b2">
+        <h1>Product</h1>
+        <input type="text" id="pdctname" placeholder="Enter product Name." />
+        <input type="text" id="pdctprice" placeholder="Enter product Price." />
+        <button class="btn addproduct">Add product</button>
+      </div>
+      <div class="amount">
+        <div class="box">
+          <h4>Total Budget</h4>
+          <p class="totalbudget">0</p>
+        </div>
+        <div class="box">
+          <h4>Expenses</h4>
+          <p class="totalexpenses">0</p>
+        </div>
+        <div class="box">
+          <h4>Balance</h4>
+          <p class="totalbalance">0</p>
+        </div>
+      </div>
+      <div class="list">
+        <h2>Expenses List</h2>
+        <div class="items">
+          <!-- Product items will be dynamically added here -->
+        </div>
+      </div>
+    </div>
+    <script>
+      let inputbudget = document.querySelector("#inputbudget");
+      let pdctname = document.querySelector("#pdctname");
+      let pdctprice = document.querySelector("#pdctprice");
+      let addproduct = document.querySelector(".addproduct");
+      let setbudgetbtn = document.querySelector(".setbudget");
+      let totalbudget = document.querySelector(".totalbudget");
+      let totalexpenses = document.querySelector(".totalexpenses");
+      let totalbalance = document.querySelector(".totalbalance");
+      let items = document.querySelector(".items");
+
+      // Initialize the products array
+      let products = [];
+      let budget = 0;
+
+      // Function to render the products list
+      function renderProducts() {
+        items.innerHTML = products
+          .map(
+            (product, index) => `
+                <div class="item">
+                    <div class="productname">${product.name}</div>
+                    <div class="productamount">${product.price}</div>
+                    <div class="cross" data-index="${index}"><i class="fa-solid fa-trash-can"></i></div>
+                </div>
+            `
+          )
+          .join("");
+
+        // Update expenses and balance
+        let totalExpenses = products.reduce(
+          (acc, product) => acc + parseFloat(product.price),
+          0
+        );
+        totalexpenses.textContent = totalExpenses.toFixed(2);
+        totalbalance.textContent = (budget - totalExpenses).toFixed(2);
+      }
+
+      // Event listener for setting the budget
+      setbudgetbtn.addEventListener("click", () => {
+        if (inputbudget.value === "" || isNaN(inputbudget.value)) {
+          alert("Please enter a valid budget.");
+        } else {
+          budget = parseFloat(inputbudget.value);
+          totalbudget.textContent = budget.toFixed(2);
+          renderProducts(); // Update expenses and balance when the budget is set
+        }
+      });
+
+      // Event listener for adding a new product
+      addproduct.addEventListener("click", () => {
+        if (budget === 0) {
+          alert("Add your budget first.");
+        } else {
+          if (
+            pdctname.value.trim() === "" ||
+            pdctprice.value.trim() === "" ||
+            isNaN(pdctprice.value)
+          ) {
+            alert('"Product Name" or "Product Price" is missing or invalid.');
+          } else {
+            // Add new product to the array
+            products.push({
+              name: pdctname.value.trim(),
+              price: parseFloat(pdctprice.value.trim()),
+            });
+
+            // Clear input fields
+            pdctname.value = "";
+            pdctprice.value = "";
+
+            // Render the updated list of products
+            renderProducts();
+          }
+        }
+      });
+
+      // Event delegation for removing products
+      items.addEventListener("click", (event) => {
+        if (event.target.closest(".cross")) {
+          // Get the index of the product to be removed
+          let index = event.target.closest(".cross").getAttribute("data-index");
+
+          // Remove product from the array
+          products.splice(index, 1);
+
+          // Render the updated list of products
+          renderProducts();
+        }
+      });
+    </script>
+  </body>
+</html>
